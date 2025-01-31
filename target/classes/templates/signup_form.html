@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Sign Room Expense</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container text-center">
+		<div>
+			<h1>User Registration - Sign Up</h1>
+		</div>
+
+		<!-- Display any general error message (like duplicate email) -->
+		<div th:if="${error}" class="alert alert-danger">
+			<p th:text="${error}"></p>
+		</div>
+
+		<form th:action="@{/process_register}" th:object="${user}" 
+			method="post" style="max-width: 600px; margin: 0 auto;">
+			<div class="m-3">
+				<!-- Email input field -->
+				<div class="form-group row">
+					<label class="col-4 col-form-label">E-mail: </label>
+					<div class="col-8">
+						<input type="email" th:field="*{email}" class="form-control" required />
+					</div>
+				</div>
+				
+				<!-- Password input field -->
+				<div class="form-group row">
+					<label class="col-4 col-form-label">Password: </label>
+					<div class="col-8">
+						<input type="password" th:field="*{password}" class="form-control" 
+							required minlength="6" maxlength="10"/>
+						<!-- Show validation error for password -->
+						<div th:if="${#fields.hasErrors('password')}" class="text-danger">
+							<p th:errors="*{password}"></p>
+						</div>
+					</div>
+				</div>
+				
+				<!-- First Name input field -->
+				<div class="form-group row">
+					<label class="col-4 col-form-label">First Name: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{firstName}" class="form-control" 
+							required minlength="2" maxlength="20"/>
+						<!-- Show validation error for first name -->
+						<div th:if="${#fields.hasErrors('firstName')}" class="text-danger">
+							<p th:errors="*{firstName}"></p>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Last Name input field -->
+				<div class="form-group row">
+					<label class="col-4 col-form-label">Last Name: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{lastName}" class="form-control" 
+							required minlength="2" maxlength="20" />
+						<!-- Show validation error for last name -->
+						<div th:if="${#fields.hasErrors('lastName')}" class="text-danger">
+							<p th:errors="*{lastName}"></p>
+						</div>
+					</div>
+				</div>
+				
+				<div>
+					<button type="submit" class="btn btn-primary">Sign Up</button> 
+					<h3><a th:href="@{/login}">Login</a></h3>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
